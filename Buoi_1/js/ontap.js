@@ -109,3 +109,4 @@ console.log(item);
 // return new list (cac item thoa dieu kien)
 const items = data.filter((element, index) => element.price > 150);
 console.log(items);
+

@@ -1,4 +1,4 @@
-import Nav from "./components/nav.js"
+import Home from "./page/home.js";
 
 class App {
     constructor(component) {
@@ -11,10 +11,10 @@ class App {
     }
 }
 
-const nav = new Nav ();
+const home = new Home();
 
 // 1 project = 1 app
-const app = new App(nav)
+const app = new App(home);
 // render giao dien
 app.renderComponent();
 

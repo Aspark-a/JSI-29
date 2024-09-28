@@ -55,6 +55,7 @@ export default class Nav {
         }
 
         gotoLogout() {
+            localStorage.removeItem("currentUser")
             window.location.href="../page/index.html";
         }
     
