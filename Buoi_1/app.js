@@ -1,21 +1,21 @@
 import Home from "./page/home.js";
 
 class App {
-    constructor(component) {
-        this.component = component;
+    constructor() {
         this.mainContainer = document.getElementById("app"); 
     }
 
-    renderComponent() {
+    renderComponent(component) {
+        thí.mainContainer.innerHTML = "";
         this.component.render(this.mainContainer);
     }
 }
 
 const home = new Home();
-
+const login = new Login();
 // 1 project = 1 app
-const app = new App(home);
+const app = new App();
 // render giao dien
-app.renderComponent();
+app.renderComponent(login);
 
 export default app;

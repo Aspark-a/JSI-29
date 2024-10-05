@@ -18,4 +18,7 @@ me.mover_left(x) # bay sang trai
 me.mover_right(x) # bay sang phai
 me.move_up(x) # bay toi
 me.move_back(x) # bay lui
+me.rotate_clockwise(d) # quay drone thuận chiều kim đồng hồ
+me.rotate_counter_clockwise(d) # quay drone ngược chiều kim đồng hồ
+# d là số đo góc quay (độ)
 
