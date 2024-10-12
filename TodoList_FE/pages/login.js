@@ -1,6 +1,9 @@
 import app from "../app.js";
 import Register from "./register.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 import firebaseApp from "../data/firebase-app.js";
 
 export default class Login {
@@ -66,14 +69,14 @@ export default class Login {
     submitButton.setAttribute("type", "submit");
     submitButton.innerText = "Login";
     // bat su kien cho login button
+
     submitButton.addEventListener("click", this.checkLogin.bind(this));
 
     // Tao link dan den register
     const registerDiv = document.createElement("div");
     registerDiv.style.textAlign = "left";
     registerDiv.innerHTML = `<a href='#' id="register-link">Create account</a>`;
-
-    // bat su kien cho link chuyen trong register
+    // bat su kien cho link chuyen trang register
     // bind: tim kiem ham trong object hien tai -> this khong bi out
     registerDiv.addEventListener("click", this.getRegister.bind(this));
 
@@ -91,18 +94,20 @@ export default class Login {
     containerDiv.appendChild(form);
     mainContainer.appendChild(containerDiv);
   }
+
   getRegister() {
     const register = new Register();
     app.renderComponent(register);
   }
+
   checkLogin() {
-    event.preventDefault
-    const email = document.getElementById("email").ariaValueMax.trim();
-    const password = document.getElementById("password").ariaValueMax.trim();
-    // khong nhap du lieu
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    // khong nhap du du lieu
     if (!(email && password)) alert("Vui long nhap du thong tin");
     else {
-      // co du dieu kien  -> check auth tren firebase
+      // co du du lieu -> check auth tren firebase
+
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -112,7 +117,7 @@ export default class Login {
         })
         .catch((error) => {
           const errorMessage = error.message;
-          alert (errorMessage)
+          alert (errorMessage);
         });
     }
   }
