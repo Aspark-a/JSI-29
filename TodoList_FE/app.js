@@ -21,6 +21,12 @@ const register = new Register();
 // 1 project = 1 app
 const app = new App();
 // render giao dien
+if (localStorage.getItem("currentUser")) {
+  const home = new Home();
+  app.renderComponent(home);
+} else {
+  const login = 
+}
 app.renderComponent(home);
 
 export default app;

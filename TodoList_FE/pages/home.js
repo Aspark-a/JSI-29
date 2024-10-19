@@ -34,7 +34,13 @@ export default class Home {
         />
       </div>
       <button type="submit" class="btn btn-primary" id="add-task-btn">Submit</button>`;
-
+      addTaskForm.addEventListener("click", async function (event) {
+        // get button add
+        const add_btn = event.target.closet("#add-task-btn");
+        if (add_btn) {
+          await this.addTask().bind(this)
+        }
+      });
     // add vao main
     main.appendChild(addTaskForm);
     // bat su kien
@@ -45,6 +51,8 @@ export default class Home {
 
     const taskList = document.createElement("div");
     taskList.classList.add("list-group");
+    await.this.getTasks();
+    print()
     taskList.innerHTML = `<a
         href="#"
         class="list-group-item list-group-item-action active"
@@ -76,8 +84,60 @@ export default class Home {
     this.footer.render(mainContainer);
   }
 
-  addTask() {
-    console.log("first");
+  async getTasks() {
+    // todo
+    // get all task list in firestore
+    const querySnapshot = await getDocs(collection(database, "tasks"));
+    const results = [];
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data()}`);
+      if (doc.data()["created_by"] === this.currentUser.uid) {
+        results.push(doc);
+        str = "";
+        switch (doc.data()["status"]) {
+          case "cancel":
+            str += `<a
+        class="list-group-item list-group-item-action disabled" id="${doc.id}"
+        aria-disabled="true">${doc.data()["name"]}</a>`;
+            break;
+          case "finished":
+            str += `<a class="list-group-item list-group-item-secondary" id="${
+              doc.id
+            }">${doc.data()["name"]}</a>
+`;
+            break;
+          default:
+str += `<a href="#" class="list-group-item list-group-item-action" id="${
+              doc.id
+            }">${doc.data()["name"]}</a>`;
+            break;
+        }
+      }
+      results.push(str);
+    });
+    this.$taskList = [...results];
+  }
+
+  async addTask() {
+    // todo
+    // get data from add task form
+    task_name = document.getElementById("task").ariaValueMax.trim();
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        created_at: new Date.now(),
+        created_by: "bH9kbeOFq7YYGyoiPxxXsL6rtcC2",
+        name: "ABC",
+        status: "due",
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
+  gotoHome() {
+    const home = new Home();
+    app.renderComponent(home);
   }
 
   checkCurrentUser() {}

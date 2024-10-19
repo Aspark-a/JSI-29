@@ -4,7 +4,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-import firebaseApp from "../data/firebase-app.js";
+import {firebaseApp} from "../data/firebase-app.js";
 
 export default class Login {
   constructor() {}
